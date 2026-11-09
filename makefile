@@ -1,4 +1,4 @@
-TestDir = ../my_get_next_line/
+TestDir = ../
 GNLfiles = get_next_line.c get_next_line_utils.c
 NORM_TARGET = get_next_line.c get_next_line_utils.c get_next_line.h
 
