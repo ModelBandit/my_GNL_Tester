@@ -1,4 +1,4 @@
-TestDir = ../
+TestDir = ../my_get_next_line/
 GNLfiles = get_next_line.c get_next_line_utils.c
 NORM_TARGET = get_next_line.c get_next_line_utils.c get_next_line.h
 
@@ -25,6 +25,5 @@ test42:
 test1M:
 	./$(outputName) -D BUFFER_SIZE 1000000 $(TestFiles)
 
-debug:
-	./$(outputName) -D BUFFER_SIZE 1 files/3_10char_endl.txt
+
 .PHONY = testAll build
