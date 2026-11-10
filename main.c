@@ -14,11 +14,11 @@ void check(const char* fName, int booleanValue);
 
 int main(int argc, char **argv)
 {
-    printf("argc: %d\n", argc);
-    for(int i = 4; i < argc; ++i)
-    {
-        printf("%s\n", argv[i]);
-    }
+    // printf("argc: %d\n", argc);
+    // for(int i = 4; i < argc; ++i)
+    // {
+    //     printf("%s\n", argv[i]);
+    // }
 
     char *test0[] = {"", NULL};
     check(argv[4], testByFile(argv[4], test0, O_RDONLY));
