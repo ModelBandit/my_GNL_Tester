@@ -8,20 +8,22 @@
 #define TRUE 1
 #define FALSE 0
 
+
 int testByFile(const char* fName, char **strs, int flag);
 int testline(const char* fName, char **strs, int flag);
 void check(const char* fName, int booleanValue);
+int test_strlen(char *s);
 
 int main(int argc, char **argv)
 {
-    // printf("argc: %d\n", argc);
+    printf("argc: %d\n", argc);
     // for(int i = 4; i < argc; ++i)
     // {
     //     printf("%s\n", argv[i]);
     // }
 
-    char *test0[] = {"", NULL};
-    check(argv[4], testByFile(argv[4], test0, O_RDONLY));
+    char *test0[] = {NULL};
+    check(argv[4], testByFile(argv[4], test0, O_RDONLY) == FALSE);
 
     char *test1[] = {"\n", NULL};
     check(argv[5], testByFile(argv[5], test1, O_RDONLY));
@@ -107,8 +109,14 @@ int testByFile(const char* fName, char **strs, int flag)
     // printf("%ld tick\n", tick);
     // printf("%ld sec\n", realSec);
     // printf("%ld ns\n", realNsec);
-    result = (double)realSec + ((double)(realNsec) * 0.000000001);
-    printf("%lf sec (%lf sec / char)\n", result, result / (double)efficiency);
+    result = (double)realSec + (double)realNsec / 1000000000;
+    if(result < 0.001)
+        printf("%.2lf us ", result * 1000000);
+    else if(result < 1)
+        printf("%.2lf ms ", result * 1000);
+    else
+        printf("%.2lf sec ", result);
+    printf("(%.2lf char / ms)", (double)efficiency / (result * 1000));
     printf("\n");
 
     return TRUE;
@@ -120,6 +128,7 @@ int testline(const char* fName, char **strs, int flag)
     if(fd == -1)
         return FALSE;
     int i = 0;
+    int len = 0;
     char *str = (char*)fName;
 
     // printf("testFile: %s\n", fName);
@@ -132,12 +141,13 @@ int testline(const char* fName, char **strs, int flag)
         // fflush(stdout);
         if(str != NULL && strcmp(str, strs[i]) != 0)
             return FALSE;
+        len += test_strlen(str);
         free(str);
         ++i;
     }
 
     close(fd);
-    return i;
+    return len;
 }
 
 void check(const char* fName, int booleanValue)
@@ -146,4 +156,12 @@ void check(const char* fName, int booleanValue)
         printf("\033[31m%s KO\033[0m\n", fName);
     else
         printf("\033[32m%s OK\033[0m\n", fName);
+}
+
+int test_strlen(char *s)
+{
+    if(s == NULL)
+        return 0;
+    
+    return strlen(s);
 }

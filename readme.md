@@ -1,6 +1,7 @@
 # My GNL Tester
 
 A simple tester for the 42 **get_next_line** project.
+This tester not working bonus.
 
 ## Usage
 

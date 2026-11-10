@@ -11,7 +11,7 @@ TestFiles = $(addprefix $(FilesDir), $(TextFiles))
 outputName = test.test
 
 
-testAll: build test1 test42 test1M
+testAll: build test1 test42 test100K
 
 build:
 	clear
@@ -22,7 +22,7 @@ test1:
 	./$(outputName) -D BUFFER_SIZE 1 $(TestFiles)
 test42:
 	./$(outputName) -D BUFFER_SIZE 42 $(TestFiles)
-test1M:
+test100K:
 	./$(outputName) -D BUFFER_SIZE 1000000 $(TestFiles)
 
 
